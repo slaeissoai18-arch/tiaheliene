@@ -3,99 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comidas Caseiras</title>
+<title>Delícias da Tia Heliene</title>
 
 <style>
 body{
-font-family: Arial, sans-serif;
 margin:0;
+font-family:Arial, sans-serif;
 background:#fff8f0;
 }
 
 header{
-background:#d35400;
+background:#b03a2e;
 color:white;
-padding:15px;
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-header img{
-height:50px;
-}
-
-.container{
 padding:20px;
+text-align:center;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:15px;
 }
 
 .card{
 background:white;
-border-radius:10px;
+border-radius:12px;
+padding:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:0.3s;
 overflow:hidden;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-.card img{
-width:100%;
-height:150px;
-object-fit:cover;
+.card:hover{
+transform:scale(1.03);
 }
 
 .card h3{
-margin:10px;
+margin:0;
 }
 
-.card p{
-margin:10px;
-color:#555;
+.price{
+color:#b03a2e;
+font-weight:bold;
 }
 
-.contact{
-background:#f39c12;
-padding:20px;
-color:white;
-margin-top:20px;
-text-align:center;
+.details{
+max-height:0;
+overflow:hidden;
+transition:0.4s ease;
+}
+
+.card.active .details{
+max-height:200px;
+margin-top:10px;
 }
 
 button{
-background:#e67e22;
-border:none;
+background:#25D366;
 color:white;
+border:none;
 padding:10px;
-border-radius:5px;
-cursor:pointer;
-}
-
-.admin-panel{
-display:none;
-position:fixed;
-top:0;
-left:0;
-right:0;
-bottom:0;
-background:white;
-overflow:auto;
-padding:20px;
-}
-
-input,textarea{
+border-radius:8px;
+margin-top:8px;
 width:100%;
-padding:8px;
-margin:5px 0;
 }
 
-.login{
-position:fixed;
-bottom:20px;
-right:20px;
+footer{
+background:#b03a2e;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
 }
 </style>
 </head>
@@ -103,103 +83,83 @@ right:20px;
 <body>
 
 <header>
-<img id="logo" src="https://via.placeholder.com/150x50">
-<h2>Comidas Caseiras</h2>
+<h2>🍽️ Delícias da Tia Heliene</h2>
+<p>Comida caseira com amor</p>
 </header>
 
-<div class="container">
-<div class="grid" id="foods"></div>
+<div class="grid">
+
+<div class="card" onclick="toggle(this)">
+<h3>Arroz com Galinha</h3>
+<p class="price">R$ 15,00</p>
+<div class="details">
+<p>Prato caseiro completo</p>
+<button onclick="pedido(event,'Arroz com Galinha')">Pedir no WhatsApp</button>
+</div>
 </div>
 
-<div class="contact">
-<h3>Contato</h3>
-<p id="contact">WhatsApp: (00) 00000-0000</p>
+<div class="card" onclick="toggle(this)">
+<h3>Maniçoba</h3>
+<p class="price">R$ 19,00</p>
+<div class="details">
+<p>Tradicional paraense</p>
+<button onclick="pedido(event,'Maniçoba')">Pedir no WhatsApp</button>
+</div>
 </div>
 
-<button class="login" onclick="login()">Admin</button>
-
-<div class="admin-panel" id="admin">
-<h2>Painel Admin</h2>
-<div id="adminFoods"></div>
-
-<h3>Contato</h3>
-<input id="contactInput">
-
-<h3>Logo</h3>
-<input id="logoInput" placeholder="URL da logo">
-
-<br><br>
-<button onclick="save()">Salvar</button>
-<button onclick="closeAdmin()">Fechar</button>
+<div class="card" onclick="toggle(this)">
+<h3>Vatapá</h3>
+<p class="price">R$ 15,00</p>
+<div class="details">
+<p>Delicioso e cremoso</p>
+<button onclick="pedido(event,'Vatapá')">Pedir no WhatsApp</button>
 </div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>Torta Salgada</h3>
+<p class="price">R$ 8,00</p>
+<div class="details">
+<p>Fatia generosa</p>
+<button onclick="pedido(event,'Torta Salgada')">Pedir no WhatsApp</button>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>Sucos</h3>
+<p class="price">R$ 4,00 / R$ 8,00</p>
+<div class="details">
+<p>Natural e gelado</p>
+<button onclick="pedido(event,'Suco')">Pedir no WhatsApp</button>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>Refrigerantes</h3>
+<p class="price">Consulte</p>
+<div class="details">
+<p>Vários tamanhos</p>
+<button onclick="pedido(event,'Refrigerante')">Pedir no WhatsApp</button>
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>📍 Tv Padre Inácio Magalhães - 977</p>
+<p>📲 (91) 98875-3232 | (91) 98819-9420</p>
+</footer>
 
 <script>
-let foods = JSON.parse(localStorage.getItem("foods")) || [
-{nome:"Macarronada",desc:"Deliciosa macarronada caseira",img:"https://via.placeholder.com/300"},
-{nome:"Maniçoba",desc:"Tradicional paraense",img:"https://via.placeholder.com/300"},
-{nome:"Arroz com galinha",desc:"Sabor caseiro",img:"https://via.placeholder.com/300"},
-{nome:"Torta salgada",desc:"Recheio especial",img:"https://via.placeholder.com/300"},
-{nome:"Pudim",desc:"Sobremesa cremosa",img:"https://via.placeholder.com/300"},
-{nome:"Bolo",desc:"Bolo fofinho",img:"https://via.placeholder.com/300"}
-];
-
-function render(){
-document.getElementById("foods").innerHTML =
-foods.map((f,i)=>`
-<div class="card">
-<img src="${f.img}">
-<h3>${f.nome}</h3>
-<p>${f.desc}</p>
-</div>`).join("");
-
-document.getElementById("adminFoods").innerHTML =
-foods.map((f,i)=>`
-<h3>${f.nome}</h3>
-<input value="${f.nome}" onchange="foods[${i}].nome=this.value">
-<textarea onchange="foods[${i}].desc=this.value">${f.desc}</textarea>
-<input value="${f.img}" onchange="foods[${i}].img=this.value">
-<hr>`).join("");
+function toggle(card){
+card.classList.toggle("active")
 }
 
-function login(){
-let u = prompt("Usuário");
-let s = prompt("Senha");
-
-if(u==="admin" && s==="1234"){
-document.getElementById("admin").style.display="block";
-document.getElementById("contactInput").value =
-localStorage.getItem("contact") || "";
-document.getElementById("logoInput").value =
-localStorage.getItem("logo") || "";
+function pedido(e,item){
+e.stopPropagation()
+let msg = encodeURIComponent("Olá! Quero pedir: " + item)
+window.open("https://wa.me/5591988753232?text="+msg)
 }
-}
-
-function save(){
-localStorage.setItem("foods",JSON.stringify(foods));
-localStorage.setItem("contact",document.getElementById("contactInput").value);
-localStorage.setItem("logo",document.getElementById("logoInput").value);
-
-document.getElementById("contact").innerText =
-document.getElementById("contactInput").value;
-
-document.getElementById("logo").src =
-document.getElementById("logoInput").value;
-
-render();
-alert("Salvo!");
-}
-
-function closeAdmin(){
-document.getElementById("admin").style.display="none";
-}
-
-document.getElementById("contact").innerText =
-localStorage.getItem("contact") || "WhatsApp: (00) 00000-0000";
-
-if(localStorage.getItem("logo"))
-document.getElementById("logo").src = localStorage.getItem("logo");
-
-render();
 </script>
 
 </body>
