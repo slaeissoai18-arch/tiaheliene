@@ -21,7 +21,7 @@ text-align:center;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
 gap:15px;
 padding:15px;
 }
@@ -29,19 +29,24 @@ padding:15px;
 .card{
 background:white;
 border-radius:12px;
-padding:15px;
+overflow:hidden;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
 cursor:pointer;
 transition:0.3s;
-overflow:hidden;
 }
 
 .card:hover{
-transform:scale(1.03);
+transform:translateY(-4px);
 }
 
-.card h3{
-margin:0;
+.card img{
+width:100%;
+height:120px;
+object-fit:cover;
+}
+
+.card-content{
+padding:12px;
 }
 
 .price{
@@ -90,56 +95,68 @@ margin-top:20px;
 <div class="grid">
 
 <div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7">
+<div class="card-content">
 <h3>Arroz com Galinha</h3>
 <p class="price">R$ 15,00</p>
 <div class="details">
-<p>Prato caseiro completo</p>
 <button onclick="pedido(event,'Arroz com Galinha')">Pedir no WhatsApp</button>
 </div>
 </div>
+</div>
 
 <div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1604908177225-7ea9c5b8f91a">
+<div class="card-content">
 <h3>Maniçoba</h3>
 <p class="price">R$ 19,00</p>
 <div class="details">
-<p>Tradicional paraense</p>
 <button onclick="pedido(event,'Maniçoba')">Pedir no WhatsApp</button>
 </div>
 </div>
+</div>
 
 <div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1604908176997-125cf9e7e5a0">
+<div class="card-content">
 <h3>Vatapá</h3>
 <p class="price">R$ 15,00</p>
 <div class="details">
-<p>Delicioso e cremoso</p>
 <button onclick="pedido(event,'Vatapá')">Pedir no WhatsApp</button>
 </div>
 </div>
+</div>
 
 <div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<div class="card-content">
 <h3>Torta Salgada</h3>
 <p class="price">R$ 8,00</p>
 <div class="details">
-<p>Fatia generosa</p>
 <button onclick="pedido(event,'Torta Salgada')">Pedir no WhatsApp</button>
 </div>
 </div>
+</div>
 
 <div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1577805947697-89e18249d767">
+<div class="card-content">
+<h3>Pudim</h3>
+<p class="price">R$ 8,00</p>
+<div class="details">
+<button onclick="pedido(event,'Pudim')">Pedir no WhatsApp</button>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
+<div class="card-content">
 <h3>Sucos</h3>
 <p class="price">R$ 4,00 / R$ 8,00</p>
 <div class="details">
-<p>Natural e gelado</p>
 <button onclick="pedido(event,'Suco')">Pedir no WhatsApp</button>
 </div>
-</div>
-
-<div class="card" onclick="toggle(this)">
-<h3>Refrigerantes</h3>
-<p class="price">Consulte</p>
-<div class="details">
-<p>Vários tamanhos</p>
-<button onclick="pedido(event,'Refrigerante')">Pedir no WhatsApp</button>
 </div>
 </div>
 
