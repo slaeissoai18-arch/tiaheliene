@@ -100,7 +100,7 @@ margin-top:20px;
 <h3>Arroz com Galinha</h3>
 <p class="price">R$ 15,00</p>
 <div class="details">
-<button onclick="pedido(event,'Arroz com Galinha')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Arroz com Galinha" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -111,7 +111,7 @@ margin-top:20px;
 <h3>Maniçoba</h3>
 <p class="price">R$ 19,00</p>
 <div class="details">
-<button onclick="pedido(event,'Maniçoba')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Maniçoba" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -122,7 +122,7 @@ margin-top:20px;
 <h3>Vatapá</h3>
 <p class="price">R$ 15,00</p>
 <div class="details">
-<button onclick="pedido(event,'Vatapá')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Vatapá" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -133,7 +133,7 @@ margin-top:20px;
 <h3>Torta Salgada</h3>
 <p class="price">R$ 8,00</p>
 <div class="details">
-<button onclick="pedido(event,'Torta Salgada')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Torta Salgada" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -144,7 +144,7 @@ margin-top:20px;
 <h3>Macarronada</h3>
 <p class="price">R$ 8,00</p>
 <div class="details">
-<button onclick="pedido(event,'Macarronada')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Macarronada" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -155,7 +155,7 @@ margin-top:20px;
 <h3>Pudim</h3>
 <p class="price">R$ 8,00</p>
 <div class="details">
-<button onclick="pedido(event,'Pudim')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Pudim" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
@@ -166,10 +166,25 @@ margin-top:20px;
 <h3>Sucos</h3>
 <p class="price">R$ 4,00 / R$ 8,00</p>
 <div class="details">
-<button onclick="pedido(event,'Suco')">Pedir no WhatsApp</button>
+<label><input type="checkbox" name="pedido" value="Suco" onclick="event.stopPropagation()"> Selecionar</label>
 </div>
 </div>
 </div>
+
+</div>
+
+<div style="padding:20px">
+
+<h3>Forma de pagamento</h3>
+<select id="pagamento" style="width:100%;padding:10px;border-radius:8px;margin-bottom:10px">
+<option value="Pix">Pix</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="Cartão">Cartão</option>
+</select>
+
+<button onclick="enviarPedido()" style="background:#b03a2e">
+Enviar pedido pelo WhatsApp
+</button>
 
 </div>
 
@@ -183,10 +198,25 @@ function toggle(card){
 card.classList.toggle("active")
 }
 
-function pedido(e,item){
-e.stopPropagation()
-let msg = encodeURIComponent("Olá! Quero pedir: " + item)
-window.open("https://wa.me/5591988753232?text="+msg)
+function enviarPedido(){
+const selecionados = document.querySelectorAll('input[name="pedido"]:checked')
+const pagamento = document.getElementById("pagamento").value
+
+let pedidos = []
+
+selecionados.forEach(item => {
+pedidos.push(item.value)
+})
+
+if(pedidos.length === 0){
+alert("Selecione pelo menos um item")
+return
+}
+
+const mensagem = `Boa noite, gostaria de um(a) ${pedidos.join(", ")} pagarei no ${pagamento}`
+const url = `https://wa.me/5591988753232?text=${encodeURIComponent(mensagem)}`
+
+window.open(url, "_blank")
 }
 </script>
 
